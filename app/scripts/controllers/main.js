@@ -12,34 +12,34 @@ angular.module('tabularDataTestApp').controller('MainCtrl', function ($scope) {
 	$scope.users = [];
 	$scope.syncUsers = [];
 
-	$scope.user1 = {name: 'aaa', email: 'ppp', childrenNo: 0, dob: new Date()};
-	$scope.user2 = {name: 'bbb', email: 'zzz', childrenNo: 0, dob: new Date()};
-	$scope.syncUsers.push($scope.user1);
-	$scope.syncUsers.push($scope.user2);
-	$scope.users = [].concat($scope.syncUsers);
-	
-
-	$scope.save = function(valid) {
-		console.log('SAVE');
-		if(!valid) {return;}
+	$scope.save = function(form) {
+		console.log('save=' + form.$valid);
+		if(!form.$valid) {return;}
 		$scope.syncUsers.unshift(angular.copy($scope.user));
 		$scope.users = [].concat($scope.syncUsers);
 		$scope.addNewMode = false;
 	};
-	  
+
 	$scope.reset = function(form) {
 		$scope.user = {childrenNo: 0};
-		
 
 		if (form) {
 	      form.$setValidity();
-		  form.$setPristine();
-	      form.$setUntouched();
-		}	    
+		  form.$setPristine(true);
+	      form.$setUntouched(true);
+		}
 	};
 
 	$scope.cancelAdd = function(form) {
 		$scope.reset(form);
-		$scope.addNewMode = !$scope.addNewMode;
+		$scope.addNewMode = false;
+	};
+
+	$scope.initAdd = function(form) {
+		form.$setPristine(true);
+	    form.$setUntouched(true);
+	    $scope.user = {childrenNo: 0};
+
+		$scope.addNewMode = true;
 	};
 });

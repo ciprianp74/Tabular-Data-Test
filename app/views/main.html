@@ -2,12 +2,12 @@
     <div class="panel panel-info">
       <div class="panel-heading">
          <div class="panel-title text-left">
-              <a  href="" ng-hide="addNewMode" ng-click="addNewMode = !addNewMode" class="btn btn-sm btn-info">
-                  <i class="selicon glyphicon glyphicon-pencil"></i> 
+              <a  href="" ng-hide="addNewMode" ng-click="initAdd(createForm)" class="btn btn-sm btn-info">
+                  <i class="selicon glyphicon glyphicon-pencil"></i>
                   Add New
               </a>
               <a  href="" ng-hide="!addNewMode" ng-click="cancelAdd(createForm)" class="btn btn-sm btn-warning">
-                  <i class="selicon glyphicon glyphicon-remove"></i> 
+                  <i class="selicon glyphicon glyphicon-remove"></i>
                   Cancel
               </a>
           </div>
@@ -54,14 +54,14 @@
               </div>
             </div>
             <nav class="form-actions col=md-12 text-center">
-              <button class="btn btn-primary" ng-click="save(createForm.$valid)">Submit</button>
+              <button class="btn btn-primary" ng-click="save(createForm)">Submit</button>
               <a href="" class="btn btn-default" ng-click="reset(createForm)">Reset</a>
             </nav>
           </form>
         </div>
       </div>
     </div>
-    <div simple-table="users" sync-colection="syncUsers">
+    <div simple-table="users" sync-collection="syncUsers">
       <div class="row">
         <div simple-search class="col-md-6">
           Search: <input type="text" name="search" ng-model="search"/>
@@ -99,7 +99,7 @@
                       </td>
                   </tr>
               </tbody>
-              
+
           </table>
       </div>
     </div>
