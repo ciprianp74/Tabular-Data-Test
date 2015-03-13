@@ -29,10 +29,10 @@ The development process uses the Node.js build tool [Grunt.js](gruntjs.com).
 To install all the dependencies run:
 
 ```
-npm install
+npm install && bower install
 ```
 
-Behind the scenes this will also call `bower install`.  Two new folders will be created in the project:
+Two new folders will be created in the project:
 
 * `node_modules` - contains the npm packages for the tools we need
 * `bower_components` - contains the angular framework files
@@ -44,7 +44,7 @@ The project is preconfigured with a simple development web server (a node.js too
 grunt serve
 ```
 
-The default browser will be launched with the following address: `http://127.0.0.1:3000/`.
+The default browser will be launched with the following address: `http://127.0.0.1:9000/`.
 
 ## Create production build
 Build a release version of the app, with minified files. The javascript, css and html files are merged into `dist` directory.
