@@ -1,0 +1,106 @@
+<div class="">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+         <div class="panel-title text-left">
+              <a  href="" ng-hide="addNewMode" ng-click="addNewMode = !addNewMode" class="btn btn-sm btn-info">
+                  <i class="selicon glyphicon glyphicon-pencil"></i> 
+                  Add New
+              </a>
+              <a  href="" ng-hide="!addNewMode" ng-click="cancelAdd(createForm)" class="btn btn-sm btn-warning">
+                  <i class="selicon glyphicon glyphicon-remove"></i> 
+                  Cancel
+              </a>
+          </div>
+      </div>
+      <div class="panel-body" collapse="!addNewMode">
+        <div data-ng-show="message" class="col-md-8 text-danger">
+            <strong data-ng-bind="message"></strong>
+        </div>
+        <div class="col-md-8">
+
+          <form name="createForm" class="form-horizontal" novalidate>
+
+            <div class="form-group" ng-class="{'has-error': createForm.name.$invalid && !createForm.name.$pristine}">
+              <label class="control-label col-md-3">Name</label>
+              <input class="col-md-6" type="text" name="name" ng-model="user.name" name="name" required placeholder="Name" />
+              <div ng-if="createForm.$submitted || createForm.name.$touched" ng-messages="createForm.name.$error" class="errors col-md-3 text-left">
+                <div ng-message="required">Required</div>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': createForm.email.$invalid && !createForm.email.$pristine}">
+              <label class="control-label col-md-3">Email</label>
+              <div class="input-group col-md-6">
+                <div class="input-group-addon">@</div>
+                <input class="form-control" type="email" name="email" ng-model="user.email" name="email" required placeholder="Email" />
+              </div>
+              <div ng-if="createForm.$submitted || createForm.email.$touched" ng-messages="createForm.email.$error" class="errors col-md-3 text-left">
+                <div ng-message="required">Required</div>
+                <div ng-message="email">The email address is invalid</div>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': createForm.dob.$invalid && !createForm.dob.$pristine}">
+              <label class="control-label col-md-3">Date of birth</label>
+              <input class="col-md-6" type="date" min="1900-01-01" max="{{maxDOB | date:'yyyy-MM-dd'}}" name="dob" ng-model="user.dob" placeholder="yyyy-MM-dd" required />
+              <div ng-if="createForm.$submitted || createForm.dob.$touched" ng-messages="createForm.dob.$error" class="errors col-md-3 text-left">
+                <div ng-message="required">Required!</div>
+                <div ng-message="date">Not a valid date!</div>
+              </div>
+            </div>
+            <div class="form-group form-group-sm" ng-class="{'has-error': createForm.childrenNo.$invalid && !createForm.childrenNo.$pristine}">
+              <label class="control-label col-md-3">Number of children</label>
+              <input class="col-md-6" type="number" min="0" max="10" name="childrenNo" ng-model="user.childrenNo" required />
+              <div ng-if="createForm.$submitted || createForm.childrenNo.$touched" ng-messages="createForm.childrenNo.$error" class="errors col-md-3 text-left">
+                <div ng-message="number">Not a valid number!</div>
+              </div>
+            </div>
+            <nav class="form-actions col=md-12 text-center">
+              <button class="btn btn-primary" ng-click="save(createForm.$valid)">Submit</button>
+              <a href="" class="btn btn-default" ng-click="reset(createForm)">Reset</a>
+            </nav>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div simple-table="users" sync-colection="syncUsers">
+      <div class="row">
+        <div simple-search class="col-md-6">
+          Search: <input type="text" name="search" ng-model="search"/>
+          <a  href="" ng-click="search = null" clear-search class="btn btn-sm btn-info">Clear</a>
+        </div>
+        <div simple-search class="col-md-5 text-right">
+          Sort by: <div sort-param class="pull-right"></div>
+        </div>
+        <div simple-search class="col-md-1 text-left">
+          <a  href="" clear-sort class="btn btn-xs btn-info">Clear</a>
+        </div>
+      </div>
+      <div class="row table-container" simple-table="users" >
+          <table class="user-table table-striped">
+              <thead>
+              <tr>
+                  <th sortable sortBy="name"  class="col-md-4">Name</th>
+                  <th sortable sortBy="email" class="col-md-4">Email</th>
+                  <th sortable sortBy="dob" class="col-md-2">DOB</th>
+                  <th sortable sortBy="childrenNo" class="col-md-2">Children no.</th>
+              </tr>
+              <tbody>
+                  <tr ng-repeat="row in users">
+                      <td class="col-md-4">
+                          {{row.name}}
+                      </td>
+                      <td class="col-md-4">
+                          {{row.email}}
+                      </td>
+                      <td class="col-md-2">
+                          {{row.dob|date:medium}}
+                      </td>
+                      <td class="col-md-2">
+                          {{row.childrenNo}}
+                      </td>
+                  </tr>
+              </tbody>
+              
+          </table>
+      </div>
+    </div>
+</div>
