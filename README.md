@@ -14,7 +14,7 @@ Either clone this repository or fork it on GitHub and clone your fork:
 
 ```
 git clone https://github.com/ciprianp74/tabular-data-test.git
-cd vcast-test
+cd tabular-data-test
 ```
 
 ## Install Dependencies
